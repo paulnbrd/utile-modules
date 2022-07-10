@@ -1,0 +1,9 @@
+{
+    "name": "youtube",
+    "version": "0.0.1",
+    "tags": [
+        "youtube"
+    ],
+    "author": "paulnbrd",
+    "description": "A module to download audio and video from YouTube"
+}
