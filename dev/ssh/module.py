@@ -175,13 +175,6 @@ class SSH:
         
     def connect(self, name: str):
         instance.connect(name)
-    
 
-class SSHModule(Module):
-    def get_command_name(self) -> str:
-        return "ssh"
 
-    def get_executor(self):
-        return SSH
-
-MODULE = SSHModule()
+MODULE = SSH
