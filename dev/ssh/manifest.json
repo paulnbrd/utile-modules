@@ -1,0 +1,9 @@
+{
+    "name": "ssh",
+    "version": "0.0.1",
+    "tags": [
+        "ssh"
+    ],
+    "author": "paulnbrd",
+    "description": "A module to connect to your SSH machines easily"
+}

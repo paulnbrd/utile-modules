@@ -1,4 +1,3 @@
-from utile.modules.Module import Module
 import platform
 import subprocess
 import requests
