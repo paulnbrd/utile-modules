@@ -1,0 +1,9 @@
+{
+    "name": "cloudflare",
+    "version": "0.0.1",
+    "tags": [
+        "cloudflare"
+    ],
+    "author": "paulnbrd",
+    "description": "A module to create tunnels, and in the future manage your entire Cloudflare account and zones"
+}

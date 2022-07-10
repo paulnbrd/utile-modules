@@ -1,0 +1,9 @@
+{
+    "name": "double",
+    "version": "0.0.1",
+    "tags": [
+        "example"
+    ],
+    "author": "paulnbrd",
+    "description": "A module to demonstrate how to create a simple module"
+}
