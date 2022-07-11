@@ -75,6 +75,8 @@ def execute(*urls, onlyaudio: bool = False):
                         else:
                             context.text = data.get("status")
                     opts = {
+                        "quiet": True,
+                        "logger": yt_logger,
                         "progress_hooks": [hook],
                         "outtmpl": file_destination,
                         'format': 'bestaudio/best' if audio_only else None,
