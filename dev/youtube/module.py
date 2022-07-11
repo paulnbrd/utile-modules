@@ -67,7 +67,7 @@ def execute(*urls, onlyaudio: bool = False):
                     with utile.utils.create_spinner() as context:
                         def hook(data: dict):
                             if data.get("status") == "downloading":
-                                context.text = "{} left, {} done".format(
+                                context.text = "ETA: {}, {} done".format(
                                     data["_eta_str"], data["_percent_str"])
                             elif data.get("status") == "finished":
                                 context.text = "Finished{}".format(
@@ -120,10 +120,8 @@ def execute(*urls, onlyaudio: bool = False):
                             context.text = termcolor.colored("Done", "green")
                     print("\nDownloaded {}".format(
                         termcolor.colored(infos["title"], "green")))
-                except ytutils.UnsupportedError:
-                    print("Invalid link provided (url: {})".format(url))
-                except ytutils.DownloadError as e:
-                    print("Could not download video (url: {})".format(url))
+                except Exception as e:
+                    print("Could not download video (url: {}, error: {})".format(url, e))
         except PermissionError:
             print("The script is missing permissions to write temporary files")
 
