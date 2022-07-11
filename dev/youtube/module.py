@@ -60,7 +60,7 @@ def execute(*urls, onlyaudio: bool = False):
             return
     for url in urls:
         try:
-            with tempfile.NamedTemporaryFile() as temp:
+            with tempfile.NamedTemporaryFile(delete=False) as temp:
                 temp.close()  # Because youtube_dl needs to access it
                 file_destination = temp.name
                 try:
@@ -117,6 +117,7 @@ def execute(*urls, onlyaudio: bool = False):
                                 i += 1
                             context.text = "Moving file..."
                             shutil.move(file_destination, new_path)
+                            os.unlink(file_destination)
                             context.text = termcolor.colored("Done", "green")
                     print("\nDownloaded {}".format(
                         termcolor.colored(infos["title"], "green")))
