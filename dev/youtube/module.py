@@ -1,6 +1,7 @@
 import tempfile
-from yt_dlp import YoutubeDL, utils
+from yt_dlp import YoutubeDL, yt_utils
 import shutil
+import utile.utils as utils
 import os
 import subprocess
 import platform
@@ -118,9 +119,9 @@ def execute(*urls, onlyaudio: bool = False):
                             context.text = termcolor.colored("Done", "green")
                     print("\nDownloaded {}".format(
                         termcolor.colored(infos["title"], "green")))
-                except utils.UnsupportedError:
+                except yt_utils.UnsupportedError:
                     print("Invalid link provided (url: {})".format(url))
-                except utils.DownloadError as e:
+                except yt_utils.DownloadError as e:
                     print("Could not download video (url: {})".format(url))
         except PermissionError:
             print("The script is missing permissions to write temporary files")
