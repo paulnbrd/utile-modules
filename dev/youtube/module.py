@@ -59,6 +59,7 @@ def execute(*urls, onlyaudio: bool = False):
     for url in urls:
         try:
             random_name = os.urandom(8).hex()
+            utile.utils.Directory.create_cache_directory("youtube")
             random_name_path = utile.utils.Directory.get_cache_path("youtube", random_name)
             file_destination = random_name_path
             try:
