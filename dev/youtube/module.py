@@ -1,7 +1,6 @@
 import tempfile
 from yt_dlp import YoutubeDL, utils
 import shutil
-import utile.utils as utils
 import os
 import subprocess
 import platform
