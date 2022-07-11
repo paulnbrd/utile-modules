@@ -59,9 +59,9 @@ def execute(*urls, onlyaudio: bool = False):
     for url in urls:
         try:
             random_name = os.urandom(8).hex()
-            utile.utils.Directory.create_cache_directory("youtube")
             random_name_path = utile.utils.Directory.get_cache_path("youtube", random_name)
-            file_destination = random_name_path
+            os.makedirs(random_name_path, exist_ok=True)
+            file_destination = os.path.join(random_name_path, "download")
             try:
                 with utile.utils.create_spinner() as context:
                     def hook(data: dict):
@@ -75,8 +75,6 @@ def execute(*urls, onlyaudio: bool = False):
                         else:
                             context.text = data.get("status")
                     opts = {
-                        "quiet": True,
-                        "logger": yt_logger,
                         "progress_hooks": [hook],
                         "outtmpl": file_destination,
                         'format': 'bestaudio/best' if audio_only else None,
@@ -115,8 +113,10 @@ def execute(*urls, onlyaudio: bool = False):
                                     if c.isalpha() or c.isdigit() or c == ' ']).rstrip() + "." + ext
                             i += 1
                         context.text = "Moving file..."
-                        shutil.move(file_destination, new_path)
-                        os.unlink(file_destination)
+                        real_file_location = os.listdir(random_name_path)[0]
+                        real_file_location = os.path.join(random_name_path, real_file_location)
+                        shutil.move(real_file_location, new_path)
+                        os.removedirs(random_name_path)
                         context.text = termcolor.colored("Done", "green")
                 print("\nDownloaded {}".format(
                     termcolor.colored(infos["title"], "green")))
