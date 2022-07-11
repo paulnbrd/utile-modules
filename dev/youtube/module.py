@@ -64,7 +64,7 @@ def execute(*urls, onlyaudio: bool = False):
                 temp.close()  # Because youtube_dl needs to access it
                 file_destination = temp.name
                 try:
-                    with utils.create_spinner() as context:
+                    with utile.utils.create_spinner() as context:
                         def hook(data: dict):
                             if data.get("status") == "downloading":
                                 context.text = "{} left, {} done".format(
