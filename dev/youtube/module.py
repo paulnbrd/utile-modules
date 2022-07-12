@@ -58,10 +58,10 @@ def execute(*urls, onlyaudio: bool = False):
             return
     for url in urls:
         try:
-            random_name = os.urandom(8).hex()
-            random_name_path = utile.utils.Directory.get_cache_path("youtube", random_name)
-            os.makedirs(random_name_path, exist_ok=True)
-            file_destination = os.path.join(random_name_path, "download")
+            file_destination = os.path.join(
+                utile.utils.Directory.YOUTUBE_VIDEOS,
+                "%(title)s by %(uploader)s on %(upload_date)s in %(playlist)s.%(ext)s"
+            )
             try:
                 with utile.utils.create_spinner() as context:
                     def hook(data: dict):
@@ -96,29 +96,6 @@ def execute(*urls, onlyaudio: bool = False):
                         context.text = "Downloading video '{}'...".format(
                             termcolor.colored(infos["title"], "green"))
                         ydl.download([url])
-                        context.text = "Resolving filepath..."
-                        if audio_only:
-                            file_destination = os.path.join(
-                                os.path.dirname(file_destination), ".mp3")
-                            ext = "mp3"
-                        else:
-                            ext = infos["ext"]
-
-                        new_path = utile.utils.Directory.YOUTUBE_VIDEOS + os.sep + "".join([
-                            c for c in infos["title"]
-                            if c.isalpha() or c.isdigit() or c == ' ']).rstrip() + "." + ext
-                        i = 1
-                        while os.path.isfile(new_path):
-                            new_path = utile.utils.Directory.YOUTUBE_VIDEOS + os.sep + "({}) ".format(i) + \
-                                "".join([
-                                    c for c in infos["title"]
-                                    if c.isalpha() or c.isdigit() or c == ' ']).rstrip() + "." + ext
-                            i += 1
-                        context.text = "Moving file..."
-                        real_file_location = os.listdir(random_name_path)[0]
-                        real_file_location = os.path.join(random_name_path, real_file_location)
-                        shutil.move(real_file_location, new_path)
-                        os.removedirs(random_name_path)
                         context.text = termcolor.colored("Done", "green")
                 print("\nDownloaded {}".format(
                     termcolor.colored(infos["title"], "green")))
